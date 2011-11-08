@@ -42,7 +42,7 @@ if( !isset($_POST['eventcode']) || $_POST['eventcode']==""){
 			die("<?xml version='1.0'?><checkCoupon><error>4</error><desc>Payment Status Incomplete</desc></checkCoupon>");
 		}
 		if(($row->checked_in_quantity < $row->quantity) || ($row->checked_in_quantity == 0) ){
-			$query_Update = "UPDATE {$wpdb->prefix}events_attendee SET checked_in_quantity = checked_in_quantity + 1 WHERE id=".$row->id;
+			$query_Update = "UPDATE {$wpdb->prefix}events_attendee SET checked_in_quantity = checked_in_quantity + 1, checked_in=1 WHERE id=".$row->id;
 			if( $wpdb->query($query_Update)){
 				echo "<?xml version='1.0'?><checkCoupon><error>0</error><desc>SUCCESS</desc></checkCoupon>";
 			} else {
