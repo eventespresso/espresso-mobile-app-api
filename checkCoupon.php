@@ -54,7 +54,7 @@ if( !isset($_POST['eventcode']) || $_POST['eventcode']==""){
 				
 				//Add a record to keep track of all check-ins
 				$sql_a = array( 'attendee_id' => $row->id, 'registration_id' => $row->registration_id, 'event_id' => $row->event_id, 'checked_in' => '1', 'date_scanned' => date('Y-m-d H:i:s', time()) );
-				$sql_data_a = array('%d', '%d', '%d',' %d', '%s');
+				$sql_data_a = array('%d', '%s', '%d',' %d', '%s');
 				$wpdb->insert( "{$wpdb->prefix}events_attendee_checkin", $sql_a, $sql_data_a );
 				
 			} else {
