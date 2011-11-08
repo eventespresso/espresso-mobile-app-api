@@ -1,6 +1,12 @@
 <?php
 include_once('../wp-load.php');
 
+//Set the default time zone
+//If the default time zone is set up in the WP Settings, then we will use that as the default.
+if (get_option('timezone_string') != '') {
+	date_default_timezone_set(get_option('timezone_string'));
+}
+
 if( !isset($_POST['authenticate']) || $_POST['authenticate']==""){
 	die("<?xml version='1.0'?><checkCoupon><error>1</error><desc>Service Not Accessible</desc></checkCoupon>");
 }elseif($_POST['authenticate'] != "fdljgrirtgibmpkjkgffdndfj1123124"){
@@ -43,8 +49,14 @@ if( !isset($_POST['eventcode']) || $_POST['eventcode']==""){
 		}
 		if(($row->checked_in_quantity < $row->quantity) || ($row->checked_in_quantity == 0) ){
 			$query_Update = "UPDATE {$wpdb->prefix}events_attendee SET checked_in_quantity = checked_in_quantity + 1, checked_in=1 WHERE id=".$row->id;
-			if( $wpdb->query($query_Update)){
+			if( $wpdb->query($query_Update) ){
 				echo "<?xml version='1.0'?><checkCoupon><error>0</error><desc>SUCCESS</desc></checkCoupon>";
+				
+				//Add a record to keep track of all check-ins
+				$sql_a = array( 'attendee_id' => $row->id, 'registration_id' => $row->registration_id, 'event_id' => $row->event_id, 'checked_in' => '1', 'date_scanned' => date('Y-m-d H:i:s', time()) );
+				$sql_data_a = array('%d', '%d', '%d',' %d', '%s');
+				$wpdb->insert( "{$wpdb->prefix}events_attendee_checkin", $sql_a, $sql_data_a );
+				
 			} else {
 				echo "<?xml version='1.0'?><checkCoupon><error>2</error><desc>mysql_error</desc></checkCoupon>";
 			}
