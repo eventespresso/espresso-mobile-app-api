@@ -3,10 +3,10 @@
 Plugin Name: Espresso Services
 Plugin URI: http://www.eventespresso.com
 Description: Back-end services for Event Espresso mobile ticketing application
-Version: 1.1
+Version: 1.2
 Author: Event Espresso
 Author URI: http://www.eventespresso.com
-Copyright 2011  Event Espresso  (email : support@eventespresso.com) 
+Copyright 2012  Event Espresso  (email : support@eventespresso.com) 
 
 WARNING!! Do not upload/install to your plugin directory. Please view the readm.txt for installation instructions.
 */
@@ -15,7 +15,7 @@ WARNING!! Do not upload/install to your plugin directory. Please view the readm.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
+<title>Event Espresso Mobile App API</title>
 </head>
 
 <body>
