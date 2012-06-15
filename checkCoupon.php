@@ -21,14 +21,21 @@ if( !isset($_POST['attendeeId']) || $_POST['attendeeId']==""){
 }
 $attendeeId = $_POST['attendeeId'];
 
+if( !isset($_POST['regId']) || $_POST['regId']==""){
+	die("<?xml version='1.0'?><checkCoupon><error>1</error><desc>RegistrationId is Empty</desc></checkCoupon>");
+}
+$registrationId = $_POST['regId'];
+
 if( !isset($_POST['ignorePayment']) || $_POST['ignorePayment']==""){
 	die("<?xml version='1.0'?><checkCoupon><error>1</error><desc>Ignore Payment Field is Empty</desc></checkCoupon>");
 }
 $ignorePayment = $_POST['ignorePayment'];
 
+
 $query = "SELECT a.*, e.event_code FROM {$wpdb->prefix}events_attendee a ";
 $query .= " LEFT JOIN {$wpdb->prefix}events_detail e ON e.id = a.event_id ";
 $query .= " WHERE a.id=".$attendeeId;
+$query .= " AND a.registration_id='".$registrationId."'";
 $result =  $wpdb->get_results($query);
 
 if(count($result) == 0){
