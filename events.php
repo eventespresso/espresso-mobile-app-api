@@ -73,15 +73,15 @@ $query .= " WHERE e.event_status != 'D' ";
 $multi_user == true ? $query .= " AND wp_user='". $userid ."' ":'';
 if($period == "today"){
 	$query .= " AND start_date <= NOW() AND end_date >= NOW()";
-	$query .= " order by start_date asc ";
+	$query .= " order by date(start_date), id asc ";
 }
 else if($period == "upcoming"){
 	$query .= " AND start_date > NOW()";
-	$query .= " order by start_date asc ";
+	$query .= " order by date(start_date), id asc ";
 }
 else if($period == "past"){
 	$query .= " AND end_date < NOW()";
-	$query .= " order by start_date desc ";
+	$query .= " order by date(start_date), id asc ";
 }
 
 if($use_limit == true){
