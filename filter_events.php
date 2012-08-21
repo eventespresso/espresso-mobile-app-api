@@ -60,8 +60,8 @@ foreach ($result as $row) {
 		$response .= "<event_code>".$row->event_code."</event_code>";
 		$response .= "<event_name><![CDATA[".$row->event_name."]]></event_name>";
 		$response .= "<event_identifier>".$row->event_identifier."</event_identifier>";
-		$response .= "<start_date>".date( 'F j, Y', strtotime($row->start_date) )."</start_date>";
-		$response .= "<end_date>".date('F j, Y', strtotime($row->end_date) )."</end_date>";
+		$response .= "<start_date>".$row->start_date."</start_date>";
+		$response .= "<end_date>".$row->end_date."</end_date>";
 		$response .= "<venue_title><![CDATA[".$row->venue_name."]]></venue_title>";
 		$response .= "</event>";
 }
