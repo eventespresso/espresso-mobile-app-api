@@ -31,7 +31,6 @@ if( !isset($_POST['ignorePayment']) || $_POST['ignorePayment']==""){
 }
 $ignorePayment = $_POST['ignorePayment'];
 
-
 $query = "SELECT a.*, e.event_code FROM {$wpdb->prefix}events_attendee a ";
 $query .= " LEFT JOIN {$wpdb->prefix}events_detail e ON e.id = a.event_id ";
 $query .= " WHERE a.id=".$attendeeId;
@@ -39,21 +38,23 @@ $query .= " AND a.registration_id='".$registrationId."'";
 $result =  $wpdb->get_results($query);
 
 if(count($result) == 0){
-	die("<?xml version='1.0'?><checkCoupon><error>3</error><desc>No Coupons For The Attendee</desc></checkCoupon>");
+	die("<?xml version='1.0'?><checkCoupon><error>3</error><desc>No Ticket For This Attendee</desc></checkCoupon>");
 }
 
 $row = $result[0];
+
 if($row->event_code != $event_code){
 	die("<?xml version='1.0'?><checkCoupon><error>5</error><desc>Attendee at wrong Event</desc></checkCoupon>");
 }
+
 if($row->payment_status == "Incomplete" && strtolower($ignorePayment) == "no"){
 	die("<?xml version='1.0'?><checkCoupon><error>4</error><desc>Payment Status Incomplete</desc></checkCoupon>");
 }
 
 if( $row->checked_in_quantity < $row->quantity || $row->checked_in_quantity == 0 ){
-	$query_Update = "UPDATE {$wpdb->prefix}events_attendee SET checked_in_quantity = checked_in_quantity + 1, checked_in=1 WHERE id=".$row->id;
+	$query_Update = "UPDATE {$wpdb->prefix}events_attendee SET checked_in_quantity = checked_in_quantity + 1, checked_in=1 WHERE id=".$row->id." AND registration_id='".$row->registration_id."'";
 	if( $wpdb->query($query_Update)){
-		$query1 = "SELECT * FROM {$wpdb->prefix}events_attendee WHERE id=".$attendeeId;	
+		$query1 = "SELECT * FROM {$wpdb->prefix}events_attendee WHERE id=".$row->id." AND registration_id='".$row->registration_id."'";	
 		$res =  $wpdb->get_results($query1);
 		
 		$row1 = $res[0];
@@ -89,10 +90,10 @@ if( $row->checked_in_quantity < $row->quantity || $row->checked_in_quantity == 0
 	}
 	
 }else{
-	$query1 = "SELECT * FROM {$wpdb->prefix}events_attendee WHERE id=".$attendeeId;	
+	$query1 = "SELECT * FROM {$wpdb->prefix}events_attendee WHERE id=".$row->id." AND registration_id='".$row->registration_id."'";	
 	$res =  $wpdb->get_results($query1);
 	$row1 = $res[0];
-	$response .= "<?xml version='1.0'?><checkCoupon><error>0</error><desc>Attendee Already Checked In</desc><attendee>";
+	$response .= "<?xml version='1.0'?><checkCoupon><attendee>";
 	$response .= "<id>".$row1->id."</id>";
 	$response .= "<registration_id>".$row1->registration_id."</registration_id>";
 	$response .= "<lname>".$row1->lname."</lname>";
@@ -116,6 +117,6 @@ if( $row->checked_in_quantity < $row->quantity || $row->checked_in_quantity == 0
 	$response .= "<transaction_details>".$row1->transaction_details."</transaction_details>";
 	$response .= "<checked_in>".$row1->checked_in."</checked_in>";
 	$response .= "<checked_in_quantity>".$row1->checked_in_quantity."</checked_in_quantity>";
-	$response .= "</attendee></checkCoupon>";
+	$response .= "</attendee><error>0</error><desc>Attendee Already Checked In</desc></checkCoupon>";
 	echo $response;	
 }

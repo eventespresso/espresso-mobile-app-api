@@ -1,9 +1,8 @@
 <?php
 /* 
-Plugin Name: Espresso Services
-Plugin URI: http://www.eventespresso.com
+Name: Espresso Services
 Description: Back-end services for Event Espresso mobile ticketing application
-Version: 1.2
+Version: 1.3
 Author: Event Espresso
 Author URI: http://www.eventespresso.com
 Copyright 2012  Event Espresso  (email : support@eventespresso.com) 
