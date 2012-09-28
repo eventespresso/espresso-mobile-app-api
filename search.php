@@ -77,8 +77,8 @@ foreach ($result as $row) {
 	$response .= "<attendee>";
 	$response .= "<id>".$row->id."</id>";
 	$response .= "<registration_id>".$row->registration_id."</registration_id>";
-	$response .= "<lname>".$row->lname."</lname>";
-	$response .= "<fname>".$row->fname."</fname>";
+	$response .= "<lname>".html_entity_decode($row->lname, ENT_QUOTES, 'UTF-8')."</lname>";
+	$response .= "<fname>".html_entity_decode($row->fname, ENT_QUOTES, 'UTF-8')."</fname>";
 	$response .= "<email>".$row->email."</email>";
 	$response .= "<phone>".$row->phone."</phone>";
 	$response .= "<payment>".$row->payment."</payment>";
@@ -94,8 +94,8 @@ foreach ($result as $row) {
 	$response .= "<end_time>".$row->end_time."</end_time>";
 	$response .= "<start_date>".$row->start_date."</start_date>";
 	$response .= "<end_date>".$row->end_date."</end_date>";
-	$response .= "<attendee_session>".$row->attendee_session."</attendee_session>";
-	$response .= "<transaction_details>".$row->transaction_details."</transaction_details>";
+	//$response .= "<attendee_session>".$row->attendee_session."</attendee_session>";
+	//$response .= "<transaction_details>".$row->transaction_details."</transaction_details>";
 	$response .= "<checked_in>".$row->checked_in."</checked_in>";
 	$response .= "<checked_in_quantity>".$row->checked_in_quantity."</checked_in_quantity>";
 	$response .= "</attendee>";
