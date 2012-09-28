@@ -58,11 +58,11 @@ foreach ($result as $row) {
 	$response .= "<event>";
 		$response .= "<id>".$row->id."</id>";
 		$response .= "<event_code>".$row->event_code."</event_code>";
-		$response .= "<event_name><![CDATA[".$row->event_name."]]></event_name>";
+		$response .= "<event_name><![CDATA[".html_entity_decode($row->event_name, ENT_QUOTES, 'UTF-8')."]]></event_name>";
 		$response .= "<event_identifier>".$row->event_identifier."</event_identifier>";
 		$response .= "<start_date>".$row->start_date."</start_date>";
 		$response .= "<end_date>".$row->end_date."</end_date>";
-		$response .= "<venue_title><![CDATA[".$row->venue_name."]]></venue_title>";
+		$response .= "<venue_title><![CDATA[".html_entity_decode($row->venue_name, ENT_QUOTES, 'UTF-8')."]]></venue_title>";
 		$response .= "</event>";
 }
 $response .= "</events>";
