@@ -2,7 +2,7 @@
 /* 
 Name: Espresso Services
 Description: Back-end services for Event Espresso mobile ticketing application
-Version: 1.3
+Version: 2.2
 Author: Event Espresso
 Author URI: http://www.eventespresso.com
 Copyright 2012  Event Espresso  (email : support@eventespresso.com) 

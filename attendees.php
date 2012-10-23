@@ -46,7 +46,7 @@ foreach ($result as $row) {
 	$response .= "<payment>".$row->payment."</payment>";
 	$response .= "<date>".$row->date."</date>";
 	$response .= "<payment_status>".$row->payment_status."</payment_status>";
-	$response .= "<amount_pd>".$row->amount_pd."</amount_pd>";
+	$response .= "<amount_pd>".$row->final_price."</amount_pd>";
 	$response .= "<price_option><![CDATA[".html_entity_decode($row->price_option, ENT_QUOTES, 'UTF-8')."]]></price_option>";
 	$response .= "<coupon_code >".$row->coupon_code."</coupon_code>";
 	$response .= "<quantity>".$row->quantity."</quantity>";

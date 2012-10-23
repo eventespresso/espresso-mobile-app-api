@@ -1,4 +1,6 @@
 <?php
+//This file is deprecated!!!
+//Don't use it
 include_once('../wp-config.php');
 include_once('../wp-load.php');
 include_once('../wp-includes/wp-db.php');
@@ -39,14 +41,14 @@ foreach ($result as $row) {
 	$response .= "<attendee>";
 	$response .= "<id>".$row->id."</id>";
 	$response .= "<registration_id>".$row->registration_id."</registration_id>";
-	$response .= "<lname>".$row->lname."</lname>";
-	$response .= "<fname>".$row->fname."</fname>";
+	$response .= "<lname><![CDATA[".html_entity_decode($row->lname, ENT_QUOTES, 'UTF-8')."]]></lname>";
+	$response .= "<fname><![CDATA[".html_entity_decode($row->fname, ENT_QUOTES, 'UTF-8')."]]></fname>";
 	$response .= "<email>".$row->email."</email>";
 	$response .= "<phone>".$row->phone."</phone>";
 	$response .= "<payment>".$row->payment."</payment>";
 	$response .= "<date>".$row->date."</date>";
 	$response .= "<payment_status>".$row->payment_status."</payment_status>";
-	$response .= "<amount_pd>".$row->amount_pd."</amount_pd>";
+	$response .= "<amount_pd>".$row->final_price."</amount_pd>";
 	$response .= "<price_option><![CDATA[".html_entity_decode($row->price_option, ENT_QUOTES, 'UTF-8')."]]></price_option>";
 	$response .= "<coupon_code >".$row->coupon_code."</coupon_code>";
 	$response .= "<quantity>".$row->quantity."</quantity>";
@@ -57,7 +59,7 @@ foreach ($result as $row) {
 	$response .= "<start_date>".$row->start_date."</start_date>";
 	$response .= "<end_date>".$row->end_date."</end_date>";
 	$response .= "<attendee_session>".$row->attendee_session."</attendee_session>";
-	$response .= "<transaction_details>".$row->transaction_details."</transaction_details>";
+	$response .= "<transaction_details><![CDATA[".html_entity_decode($row->transaction_details, ENT_QUOTES, 'UTF-8')."]]></transaction_details>";
 	$response .= "<checked_in>".$row->checked_in."</checked_in>";
 	$response .= "<checked_in_quantity>".$row->checked_in_quantity."</checked_in_quantity>";
 	$response .= "</attendee>";
