@@ -70,7 +70,7 @@ if( $row->checked_in_quantity < $row->quantity || $row->checked_in_quantity == 0
 		$response .= "<date>".$row1->date."</date>";
 		$response .= "<payment_status>".$row1->payment_status."</payment_status>";
 		$response .= "<amount_pd>".$row1->amount_pd."</amount_pd>";
-		$response .= "<price_option>".$row1->price_option."</price_option>";
+		$response .= "<price_option><![CDATA[".html_entity_decode($row1->price_option, ENT_QUOTES, 'UTF-8')."]]></price_option>";
 		$response .= "<coupon_code >".$row1->coupon_code."</coupon_code>";
 		$response .= "<quantity>".$row1->quantity."</quantity>";
 		$response .= "<payment_date>".$row1->payment_date."</payment_date>";
@@ -104,7 +104,7 @@ if( $row->checked_in_quantity < $row->quantity || $row->checked_in_quantity == 0
 	$response .= "<date>".$row1->date."</date>";
 	$response .= "<payment_status>".$row1->payment_status."</payment_status>";
 	$response .= "<amount_pd>".$row1->amount_pd."</amount_pd>";
-	$response .= "<price_option>".$row1->price_option."</price_option>";
+	$response .= "<price_option><![CDATA[".html_entity_decode($row1->price_option, ENT_QUOTES, 'UTF-8')."]]></price_option>";
 	$response .= "<coupon_code >".$row1->coupon_code."</coupon_code>";
 	$response .= "<quantity>".$row1->quantity."</quantity>";
 	$response .= "<payment_date>".$row1->payment_date."</payment_date>";
