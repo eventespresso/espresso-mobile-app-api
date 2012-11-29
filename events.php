@@ -49,6 +49,16 @@ if(count($result_user)==0){
 	$userid = $result_user[0]->ID;
 }
 
+//Get the role for this user
+$caps = get_user_meta($userid, 'wp_capabilities', true);
+$roles = array_keys((array)$caps);
+//Set this to whatever role is needed to scan tickets
+if ($roles[0] == 'administrator'){
+	//Continue
+}else{
+	die("<?xml version='1.0'?><events><error>4</error><desc>Invalid User Role</desc></events>");
+}
+
 //get total count of event , this is required for paging
 $countQuery = "SELECT id FROM {$wpdb->prefix}events_detail WHERE event_status != 'D'" ;
 $multi_user == true ? $countQuery .= " AND wp_user='". $userid ."' ":'';
